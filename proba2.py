@@ -100,9 +100,6 @@ if __name__ == "__main__":
                 linkcontents.append(soups[i].find_all('article')[0].find_all('p')[n].text)
         contents.append(linkcontents)
 
-
-    dictionary = dict(zip(keys, values))
-
     out=[]
     for i in range(len(pagelinks_final)):
         dic={"link":str(pagelinks_final[i]), "content":str(contents[i])}
