@@ -46,10 +46,6 @@ dotenv.load_dotenv()
 constring = os.environ["VL_CONSTRING"]
 
 
-# In[79]:
-
-
-get_ipython().system('pip install mysqlclient psycopg2')
 
 
 # In[70]:
