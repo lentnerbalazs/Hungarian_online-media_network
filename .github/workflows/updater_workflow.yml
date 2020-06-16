@@ -22,9 +22,10 @@ jobs:
         pip install -r requirements.txt
     - name: Update sheet
       env:
+        VL_CONSTRING: ${{ secrets.VL_CONSTRING }}
         GSPREAD_PRIVATE_KEY: ${{ secrets.GS_PRIVATE_KEY }}
       run: |
-        python proba2.py
+        python proba3.py
  
         git config --global user.email "gh-actions@github.com"
         git config --global user.name "github actions"
