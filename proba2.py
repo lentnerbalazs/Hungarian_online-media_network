@@ -33,7 +33,7 @@ from datetime import datetime
 import re
 import arrow
 
-
+dotenv.load_dotenv()
 # In[8]:
 
 
