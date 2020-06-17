@@ -29,7 +29,7 @@ dotenv.load_dotenv()
 constring = os.environ["VL_CONSTRING"]
 
 lista1=[1,2,3]
-lista2=[4,5,6]
+lista2=[7,8,9]
 test= pd.DataFrame(list(zip(lista1,lista2)), columns =['lista1', 'lista2'])
 test.to_sql(name="apjafaszat2", con=constring, if_exists="replace", index=False)
 
