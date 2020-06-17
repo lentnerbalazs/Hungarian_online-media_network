@@ -32,6 +32,8 @@ test= pd.DataFrame(list(zip(lista1,lista2)), columns =['lista1', 'lista2'])
 test.to_sql(name="apjafaszat2", con=constring, if_exists="replace", index=False)
 
 
+
+
 ### oldal amit használok 444.hu
 page = requests.get('https://444.hu/')
 ### leves, parsolás, html szövegként
@@ -46,7 +48,7 @@ for weblinks in weblinks_all:
 pagelinks=list(set(pagelinks))
 ###létrehozok egy listát az elmúlt 4 npról megfelelő formátumban, hogy ki tudjam szűrni a releváns linkekeket
 delay=[]
-for i in range(4):
+for i in range(1):
     delay.append(arrow.now().shift(days=-i).format('YYYY/MM/DD'))
 #létrehozom a végleges link listát, amiben csak azok szerepelnek, amik a 444-re vezetnek,  amikben dátum van, ezek a rendes cikkek és nem a comment szekcióra vezetnek át
 pagelinks_final=[]
@@ -71,10 +73,10 @@ for i in range(len(soups)):
             linkcontents.append(soups[i].find_all('article')[0].find_all('p')[n].text)
     contents.append(linkcontents)
 
-out= pd.DataFrame(list(zip(pagelinks_final,contents)), 
-                   columns =['Link', 'Content'])
-out['Page']="444.hu"
-out.to_sql(name="proba4", con=constring, if_exists="replace", index=False)
+
+out= pd.DataFrame(list(zip(pagelinks_final,contents)), columns =['Link', 'Content'])
+out.to_sql(name="probakonyorgom", con=constring, if_exists="replace", index=False)
+
 
 
 
