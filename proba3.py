@@ -66,11 +66,10 @@ if __name__ == "__main__":
                 linkcontents.append(soups[i].find_all('article')[0].find_all('p')[n].text)
         contents.append(linkcontents)
 
-
-    out= pd.DataFrame(list(zip(pagelinks_final,contents)), 
+out= pd.DataFrame(list(zip(pagelinks_final,contents)), 
                    columns =['Link', 'Content'])
-    out['Page']="444.hu"
-    out.to_sql(name="proba4", con=constring, if_exists="replace", index=False)
+out['Page']="444.hu"
+out.to_sql(name="proba4", con=constring, if_exists="replace", index=False)
 
 
 
