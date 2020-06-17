@@ -24,9 +24,6 @@ from datetime import datetime
 import re
 import arrow
 
-import sqlalchemy
-
-
 dotenv.load_dotenv()
 
 
