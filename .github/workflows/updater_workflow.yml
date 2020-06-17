@@ -29,7 +29,6 @@ jobs:
  
         git config --global user.email "gh-actions@github.com"
         git config --global user.name "github actions"
-        git add docs
         git commit --message "github actions dashboard build"
         git remote add origin-pages https://${GH_TOKEN}@https://github.com/lentnerbalazs/Vig_Lentner.git > /dev/null 2>&1
         git push --quiet origin-pages HEAD:master
