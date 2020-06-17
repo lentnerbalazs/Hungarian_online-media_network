@@ -29,5 +29,3 @@ jobs:
  
         git config --global user.email "gh-actions@github.com"
         git config --global user.name "github actions"
-        git commit --message "github actions dashboard build"
-        git push --quiet origin-pages HEAD:master
