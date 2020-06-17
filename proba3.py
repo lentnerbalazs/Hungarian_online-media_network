@@ -26,6 +26,11 @@ dotenv.load_dotenv()
 
 constring = os.environ["VL_CONSTRING"]
 
+lista1=[1,2,3]
+lista2=[4,5,6]
+test= pd.DataFrame(list(zip(lista1,lista2)), columns =['lista1', 'lista2'])
+test.to_sql(name="apjafaszat2", con=constring, if_exists="replace", index=False)
+
 if __name__ == "__main__":
     ### oldal amit használok 444.hu
     page = requests.get('https://444.hu/')
