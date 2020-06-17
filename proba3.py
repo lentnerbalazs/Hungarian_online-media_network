@@ -12,15 +12,10 @@ import string
 import requests
 from bs4 import BeautifulSoup
 
-import gspread
-
+import sqlalchemy
 import bs4
 
 import selenium
-
-from oauth2client.service_account import ServiceAccountCredentials
-
-
 import requests
 from bs4 import BeautifulSoup
 
