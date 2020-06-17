@@ -18,9 +18,12 @@ import numpy as np
 from datetime import datetime
 import re
 import arrow
+import sqlalchemy
 
 dotenv.load_dotenv()
 
 
 
 constring = os.environ["VL_CONSTRING"]
+
+a=7
