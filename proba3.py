@@ -20,6 +20,8 @@ import re
 import arrow
 import sqlalchemy
 
+from bs4 import BeautifulSoup
+
 dotenv.load_dotenv()
 
 
