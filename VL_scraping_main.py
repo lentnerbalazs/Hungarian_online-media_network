@@ -104,6 +104,11 @@ for item in soup.find_all("a"):
             l.append(item.get("href"))
 links = list(set(l))
 
+hvg_links = []
+for link in links:
+    if "https://" not in link:
+        hvg_links.append("https://hvg.hu" + link)
+
 
 soups = get_soups(hvg_links)
 
