@@ -69,7 +69,7 @@ def get_soups(page_links):
         page = requests.get(page_link, allow_redirects=False)
         soup = BeautifulSoup(page.content, "html.parser")
         soups.append(soup)
-        time.sleep(5)
+        time.sleep(2)
     return soups
 
 
@@ -310,7 +310,7 @@ new_posts=pd.concat([index_out,negy_out,hvg_out,origo_out,huszon_out,ripost_out,
 # In[ ]:
 
 
-out.to_sql(name="VL_articles_main_v1", con=constring, if_exists="append", index=False)
+new_posts.to_sql(name="VL_articles_main_v1", con=constring, if_exists="append", index=False)
 
 
 # In[ ]:
@@ -334,5 +334,5 @@ main=main.drop_duplicates(subset='Link', keep="last")
 # In[ ]:
 
 
-main..to_sql(name="VL_articles_main_v1", con=constring, if_exists="replace", index=False)
+main.to_sql(name="VL_articles_main_v1", con=constring, if_exists="replace", index=False)
 
