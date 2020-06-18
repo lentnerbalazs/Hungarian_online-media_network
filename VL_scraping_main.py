@@ -260,18 +260,18 @@ ripost_out["Page"] = "Ripost"
 
 
 # 888.hu
-#page = requests.get("https://888.hu/")
-#soup = BeautifulSoup(page.content, "html.parser")
-#l = []
-#for item in soup.find_all("a"):
+# page = requests.get("https://888.hu/")
+# soup = BeautifulSoup(page.content, "html.parser")
+# l = []
+# for item in soup.find_all("a"):
 #    if type(item.get("href")) == str:
 #        if "888.hu" in item.get("href"):
 #            l.append(item.get("href"))
 #
-#links = list(set(l))
+# links = list(set(l))
 #
-#nyolc_links = []
-#for link in links:
+# nyolc_links = []
+# for link in links:
 #    try:
 #        a = int(link[-8:-1])
 #        nyolc_links.append(link)
@@ -280,10 +280,10 @@ ripost_out["Page"] = "Ripost"
 #
 ## ezt csekkolni kell minden nap mi az új és csak azokat beletenni!
 #
-#soups = get_soups(nyolc_links)
+# soups = get_soups(nyolc_links)
 #
-#contents = []
-#for i in range(len(soups)):
+# contents = []
+# for i in range(len(soups)):
 #    linkcontents = []
 #    soup = soups[i].find("div", class_=re.compile("maincontent8")).find_all("p")
 #    for n in range(len(soup)):
@@ -291,9 +291,8 @@ ripost_out["Page"] = "Ripost"
 #            linkcontents.append(soup[n].text)
 #    contents.append(" ".join(linkcontents))
 #
-#nyolc_out = pd.DataFrame(list(zip(nyolc_links, contents)), columns=["Link", "Content"])
-#nyolc_out["Page"] = "888"
-
+# nyolc_out = pd.DataFrame(list(zip(nyolc_links, contents)), columns=["Link", "Content"])
+# nyolc_out["Page"] = "888"
 
 
 # VG
@@ -435,6 +434,31 @@ for soup in soups:
 napi_out = pd.DataFrame(list(zip(napi_links, contents)), columns=["Link", "Content"])
 napi_out["Page"] = "Napi.hu"
 
+
+home = "index.hu"
+day = date.today().strftime("%%2F%Y%%2F%m%%2F%d")
+links = get_links(home, day)
+
+index_links = []
+for i in range(len(links)):
+    if "mindekozben" not in links[i]:
+        index_links.append(links[i])
+
+soups = get_soups(index_links)
+
+contents = []
+for i in range(len(soups)):
+    linkcontents = []
+    soup = soups[i].find("div", class_=re.compile("cikk-torzs")).find_all("p")
+    for n in range(len(soup)):
+        if soup != "":
+            linkcontents.append(soup[n].text)
+    contents.append(" ".join(linkcontents[1:]))
+
+index_out = pd.DataFrame(list(zip(index_links, contents)), columns=["Link", "Content"])
+index_out["Page"] = "Index"
+
+
 new_posts = pd.concat(
     [
         negy_out,
@@ -442,12 +466,13 @@ new_posts = pd.concat(
         origo_out,
         huszon_out,
         ripost_out,
-        #nyolc_out,
+        # nyolc_out,
         mandiner_out,
         figyelo_out,
         vg_out,
         napi_out,
         alfahir_out,
+        index_out,
     ]
 )
 
