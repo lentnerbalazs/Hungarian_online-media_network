@@ -62,7 +62,41 @@ def get_soups(page_links, sleep_time=1):
 
 
 # In[ ]:
+# Mandiner
+home = "mandiner.hu"
+day = date.today().strftime("%Y%m%d")
+# day = '20200617'
 
+page = requests.get("https://" + home + "/")
+soup = BeautifulSoup(page.content, "html.parser")
+l = []
+for item in soup.find_all("a"):
+    if type(item.get("href")) == str:
+        if day in item.get("href"):
+            l.append(item.get("href"))
+links = list(set(l))
+
+mandiner_links = []
+for link in links:
+    if "https://" not in link:
+        if "#comments" not in link:
+            mandiner_links.append("https://mandiner.hu" + link)
+
+soups = get_soups(mandiner_links)
+
+contents = []
+for soup in soups:
+    linkcontents = []
+    soup = soup.find("div", class_=re.compile("articletext")).find_all("p")
+    for n in range(len(soup)):
+        if (soup) != "":
+            linkcontents.append(soup[n].text)
+    contents.append(" ".join(linkcontents))
+
+mandiner_out = pd.DataFrame(
+    list(zip(mandiner_links, contents)), columns=["Link", "Content"]
+)
+mandiner_out["Page"] = "Mandiner"
 
 # 444
 home = "444.hu"
@@ -261,41 +295,6 @@ ripost_out["Page"] = "Ripost"
 #nyolc_out["Page"] = "888"
 
 
-# Mandiner
-home = "mandiner.hu"
-day = date.today().strftime("%Y%m%d")
-# day = '20200617'
-
-page = requests.get("https://" + home + "/")
-soup = BeautifulSoup(page.content, "html.parser")
-l = []
-for item in soup.find_all("a"):
-    if type(item.get("href")) == str:
-        if day in item.get("href"):
-            l.append(item.get("href"))
-links = list(set(l))
-
-mandiner_links = []
-for link in links:
-    if "https://" not in link:
-        if "#comments" not in link:
-            mandiner_links.append("https://mandiner.hu" + link)
-
-soups = get_soups(mandiner_links)
-
-contents = []
-for soup in soups:
-    linkcontents = []
-    soup = soup.find("div", class_=re.compile("articletext")).find_all("p")
-    for n in range(len(soup)):
-        if (soup) != "":
-            linkcontents.append(soup[n].text)
-    contents.append(" ".join(linkcontents))
-
-mandiner_out = pd.DataFrame(
-    list(zip(mandiner_links, contents)), columns=["Link", "Content"]
-)
-mandiner_out["Page"] = "Mandiner"
 
 # VG
 page = requests.get("https://vg.hu/")
