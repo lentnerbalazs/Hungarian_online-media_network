@@ -442,7 +442,7 @@ new_posts = pd.concat(
         origo_out,
         huszon_out,
         ripost_out,
-        nyolc_out,
+        #nyolc_out,
         mandiner_out,
         figyelo_out,
         vg_out,
