@@ -22,7 +22,7 @@ jobs:
         VL_CONSTRING: ${{ secrets.VL_CONSTRING }}
         GSPREAD_PRIVATE_KEY: ${{ secrets.GS_PRIVATE_KEY }}
       run: |
-        python proba5.py
+        python VL_scraping_main.py
  
         git config --global user.email "gh-actions@github.com"
         git config --global user.name "github actions"
