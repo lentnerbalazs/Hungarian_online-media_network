@@ -82,35 +82,6 @@ def get_soups(page_links):
 # In[8]:
 
 
-#Index
-home = "index.hu"
-day = date.today().strftime("%%2F%Y%%2F%m%%2F%d")
-links = get_links(home, day)
-
-index_links = []
-for i in range(len(links)):
-    if "mindekozben" not in links[i]:
-        index_links.append(links[i])
-
-soups = get_soups(index_links)
-
-contents = []
-for i in range(len(soups)):
-    linkcontents = []
-    for n in range(
-        len(soups[i].find("div", class_=re.compile("cikk-torzs")).find_all("p"))
-    ):
-        if (soups[i].find("div", class_=re.compile("cikk-torzs")).find_all("p")) != "":
-            linkcontents.append(
-                soups[i]
-                .find("div", class_=re.compile("cikk-torzs"))
-                .find_all("p")[n]
-                .text
-            )
-    contents.append(" ".join(linkcontents[1:]))
-
-index_out = pd.DataFrame(list(zip(index_links, contents)), columns=["Link", "Content"])
-index_out['Page']="Index"
 
 
 # In[ ]:
@@ -304,7 +275,7 @@ nyolc_out['Page']="888"
 # In[ ]:
 
 
-new_posts=pd.concat([index_out,negy_out,hvg_out,origo_out,huszon_out,ripost_out,nyolc_out])
+new_posts=pd.concat([negy_out,hvg_out,origo_out,huszon_out,ripost_out,nyolc_out])
 
 
 # In[ ]:
