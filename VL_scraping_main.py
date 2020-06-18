@@ -62,7 +62,41 @@ def get_soups(page_links, sleep_time=1):
 
 
 # In[ ]:
+# Mandiner
+home = "mandiner.hu"
+day = date.today().strftime("%Y%m%d")
+# day = '20200617'
 
+page = requests.get("https://" + home + "/")
+soup = BeautifulSoup(page.content, "html.parser")
+l = []
+for item in soup.find_all("a"):
+    if type(item.get("href")) == str:
+        if day in item.get("href"):
+            l.append(item.get("href"))
+links = list(set(l))
+
+mandiner_links = []
+for link in links:
+    if "https://" not in link:
+        if "#comments" not in link:
+            mandiner_links.append("https://mandiner.hu" + link)
+
+soups = get_soups(mandiner_links)
+
+contents = []
+for soup in soups:
+    linkcontents = []
+    soup = soup.find("div", class_=re.compile("articletext")).find_all("p")
+    for n in range(len(soup)):
+        if (soup) != "":
+            linkcontents.append(soup[n].text)
+    contents.append(" ".join(linkcontents))
+
+mandiner_out = pd.DataFrame(
+    list(zip(mandiner_links, contents)), columns=["Link", "Content"]
+)
+mandiner_out["Page"] = "Mandiner"
 
 # 444
 home = "444.hu"
@@ -107,7 +141,8 @@ links = list(set(l))
 hvg_links = []
 for link in links:
     if "https://" not in link:
-        hvg_links.append("https://hvg.hu" + link)
+        if "/360/" not in link:
+            hvg_links.append("https://hvg.hu" + link)
 
 
 soups = get_soups(hvg_links)
@@ -156,7 +191,12 @@ origo_out["Page"] = "Origo"
 home = "24.hu"
 day = date.today().strftime("%Y/%m/%d/")
 # day = "2020/06/17"
-huszon_links = get_links(home, day)
+links = get_links(home, day)
+
+huszon_links = []
+for link in links:
+    if "https://24.hu/" in link:
+        huszon_links.append(link)
 
 soups = get_soups(huszon_links)
 
@@ -220,76 +260,41 @@ ripost_out["Page"] = "Ripost"
 
 
 # 888.hu
-page = requests.get("https://888.hu/")
-soup = BeautifulSoup(page.content, "html.parser")
-l = []
-for item in soup.find_all("a"):
-    if type(item.get("href")) == str:
-        if "888.hu" in item.get("href"):
-            l.append(item.get("href"))
+#page = requests.get("https://888.hu/")
+#soup = BeautifulSoup(page.content, "html.parser")
+#l = []
+#for item in soup.find_all("a"):
+#    if type(item.get("href")) == str:
+#        if "888.hu" in item.get("href"):
+#            l.append(item.get("href"))
+#
+#links = list(set(l))
+#
+#nyolc_links = []
+#for link in links:
+#    try:
+#        a = int(link[-8:-1])
+#        nyolc_links.append(link)
+#    except:
+#        pass
+#
+## ezt csekkolni kell minden nap mi az új és csak azokat beletenni!
+#
+#soups = get_soups(nyolc_links)
+#
+#contents = []
+#for i in range(len(soups)):
+#    linkcontents = []
+#    soup = soups[i].find("div", class_=re.compile("maincontent8")).find_all("p")
+#    for n in range(len(soup)):
+#        if soup != "":
+#            linkcontents.append(soup[n].text)
+#    contents.append(" ".join(linkcontents))
+#
+#nyolc_out = pd.DataFrame(list(zip(nyolc_links, contents)), columns=["Link", "Content"])
+#nyolc_out["Page"] = "888"
 
-links = list(set(l))
 
-nyolc_links = []
-for link in links:
-    try:
-        a = int(link[-8:-1])
-        nyolc_links.append(link)
-    except:
-        pass
-
-# ezt csekkolni kell minden nap mi az új és csak azokat beletenni!
-
-soups = get_soups(nyolc_links)
-
-contents = []
-for i in range(len(soups)):
-    linkcontents = []
-    soup = soups[i].find("div", class_=re.compile("maincontent8")).find_all("p")
-    for n in range(len(soup)):
-        if soup != "":
-            linkcontents.append(soup[n].text)
-    contents.append(" ".join(linkcontents))
-
-nyolc_out = pd.DataFrame(list(zip(nyolc_links, contents)), columns=["Link", "Content"])
-nyolc_out["Page"] = "888"
-
-
-# Mandiner
-home = "mandiner.hu"
-day = date.today().strftime("%Y%m%d")
-# day = '20200617'
-
-page = requests.get("https://" + home + "/")
-soup = BeautifulSoup(page.content, "html.parser")
-l = []
-for item in soup.find_all("a"):
-    if type(item.get("href")) == str:
-        if day in item.get("href"):
-            l.append(item.get("href"))
-links = list(set(l))
-
-mandiner_links = []
-for link in links:
-    if "https://" not in link:
-        if "#comments" not in link:
-            mandiner_links.append("https://mandiner.hu" + link)
-
-soups = get_soups(mandiner_links)
-
-contents = []
-for soup in soups:
-    linkcontents = []
-    soup = soup.find("div", class_=re.compile("articletext")).find_all("p")
-    for n in range(len(soup)):
-        if (soup) != "":
-            linkcontents.append(soup[n].text)
-    contents.append(" ".join(linkcontents))
-
-mandiner_out = pd.DataFrame(
-    list(zip(mandiner_links, contents)), columns=["Link", "Content"]
-)
-mandiner_out["Page"] = "Mandiner"
 
 # VG
 page = requests.get("https://vg.hu/")
@@ -437,7 +442,7 @@ new_posts = pd.concat(
         origo_out,
         huszon_out,
         ripost_out,
-        nyolc_out,
+        #nyolc_out,
         mandiner_out,
         figyelo_out,
         vg_out,
