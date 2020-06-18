@@ -226,39 +226,39 @@ ripost_out["Page"] = "Ripost"
 
 
 # 888.hu
-page = requests.get("https://888.hu/")
-soup = BeautifulSoup(page.content, "html.parser")
-l = []
-for item in soup.find_all("a"):
-    if type(item.get("href")) == str:
-        if "888.hu" in item.get("href"):
-            l.append(item.get("href"))
-
-links = list(set(l))
-
-nyolc_links = []
-for link in links:
-    try:
-        a = int(link[-8:-1])
-        nyolc_links.append(link)
-    except:
-        pass
-
-# ezt csekkolni kell minden nap mi az új és csak azokat beletenni!
-
-soups = get_soups(nyolc_links)
-
-contents = []
-for i in range(len(soups)):
-    linkcontents = []
-    soup = soups[i].find("div", class_=re.compile("maincontent8")).find_all("p")
-    for n in range(len(soup)):
-        if soup != "":
-            linkcontents.append(soup[n].text)
-    contents.append(" ".join(linkcontents))
-
-nyolc_out = pd.DataFrame(list(zip(nyolc_links, contents)), columns=["Link", "Content"])
-nyolc_out["Page"] = "888"
+#page = requests.get("https://888.hu/")
+#soup = BeautifulSoup(page.content, "html.parser")
+#l = []
+#for item in soup.find_all("a"):
+#    if type(item.get("href")) == str:
+#        if "888.hu" in item.get("href"):
+#            l.append(item.get("href"))
+#
+#links = list(set(l))
+#
+#nyolc_links = []
+#for link in links:
+#    try:
+#        a = int(link[-8:-1])
+#        nyolc_links.append(link)
+#    except:
+#        pass
+#
+## ezt csekkolni kell minden nap mi az új és csak azokat beletenni!
+#
+#soups = get_soups(nyolc_links)
+#
+#contents = []
+#for i in range(len(soups)):
+#    linkcontents = []
+#    soup = soups[i].find("div", class_=re.compile("maincontent8")).find_all("p")
+#    for n in range(len(soup)):
+#        if soup != "":
+#            linkcontents.append(soup[n].text)
+#    contents.append(" ".join(linkcontents))
+#
+#nyolc_out = pd.DataFrame(list(zip(nyolc_links, contents)), columns=["Link", "Content"])
+#nyolc_out["Page"] = "888"
 
 
 # Mandiner
