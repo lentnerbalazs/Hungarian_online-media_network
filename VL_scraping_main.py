@@ -157,7 +157,12 @@ origo_out["Page"] = "Origo"
 home = "24.hu"
 day = date.today().strftime("%Y/%m/%d/")
 # day = "2020/06/17"
-huszon_links = get_links(home, day)
+links = get_links(home, day)
+
+huszon_links = []
+for link in links:
+    if "https://24.hu/" in link:
+        huszon_links.append(link)
 
 soups = get_soups(huszon_links)
 
