@@ -97,6 +97,7 @@ mandiner_out = pd.DataFrame(
     list(zip(mandiner_links, contents)), columns=["Link", "Content"]
 )
 mandiner_out["Page"] = "Mandiner"
+mandiner_out["Soup"] = soups
 
 # 444
 home = "444.hu"
@@ -115,7 +116,7 @@ for i in range(len(soups)):
 
 negy_out = pd.DataFrame(list(zip(negy_links, contents)), columns=["Link", "Content"])
 negy_out["Page"] = "444"
-
+negy_out["Soup"] = soups
 
 # In[9]:
 
@@ -158,6 +159,7 @@ for i in range(len(soups)):
 
 hvg_out = pd.DataFrame(list(zip(hvg_links, contents)), columns=["Link", "Content"])
 hvg_out["Page"] = "HVG"
+hvg_out["soup"] = soups
 
 
 # In[ ]:
@@ -182,7 +184,7 @@ for i in range(len(soups)):
 
 origo_out = pd.DataFrame(list(zip(origo_links, contents)), columns=["Link", "Content"])
 origo_out["Page"] = "Origo"
-
+origo_out["Soup"] = soups
 
 # In[ ]:
 
@@ -217,7 +219,7 @@ huszon_out = pd.DataFrame(
     list(zip(huszon_links, contents)), columns=["Link", "Content"]
 )
 huszon_out["Page"] = "24.hu"
-
+huszon_out["Soup"] = soups
 
 # In[ ]:
 
@@ -254,7 +256,7 @@ ripost_out = pd.DataFrame(
     list(zip(ripost_links, contents)), columns=["Link", "Content"]
 )
 ripost_out["Page"] = "Ripost"
-
+ripost_out["Soup"] = soups
 
 # In[ ]:
 
@@ -325,6 +327,7 @@ for soup in soups:
 
 vg_out = pd.DataFrame(list(zip(vg_links, contents)), columns=["Link", "Content"])
 vg_out["Page"] = "Világgazdaság"
+vg_out["Soup"] = soups
 
 # Figyelő
 
@@ -363,6 +366,7 @@ figyelo_out = pd.DataFrame(
     list(zip(figyelo_links, contents)), columns=["Link", "Content"]
 )
 figyelo_out["Page"] = "Figyelő"
+figyelo_out["Soup"] = soups
 
 
 # Alfahír
@@ -398,6 +402,7 @@ alfahir_out = pd.DataFrame(
     list(zip(alfahir_links, contents)), columns=["Link", "Content"]
 )
 alfahir_out["Page"] = "Alfahír"
+alfahir_out["Soup"] = soups
 
 # Napi.hu
 page = requests.get("https://napi.hu/")
@@ -433,6 +438,7 @@ for soup in soups:
 
 napi_out = pd.DataFrame(list(zip(napi_links, contents)), columns=["Link", "Content"])
 napi_out["Page"] = "Napi.hu"
+napi_out["Soup"] = soups
 
 
 home = "index.hu"
@@ -457,6 +463,7 @@ for i in range(len(soups)):
 
 index_out = pd.DataFrame(list(zip(index_links, contents)), columns=["Link", "Content"])
 index_out["Page"] = "Index"
+index_out["Soup"] = soups
 
 
 new_posts = pd.concat(
@@ -475,7 +482,7 @@ new_posts = pd.concat(
         index_out,
     ]
 )
-
+new_posts["Date"] = date.today()
 
 # In[ ]:
 
