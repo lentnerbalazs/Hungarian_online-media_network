@@ -4,7 +4,6 @@ import os
 import dotenv
 import string
 import requests
-import bs4
 
 from bs4 import BeautifulSoup
 import bs4
@@ -51,7 +50,7 @@ def get_links(home_string, day_string):
     return links
 
 
-def get_soups(page_links, sleep_time=1):
+def get_soups(page_links, sleep_time=3):
     soups = []
     for page_link in page_links:
         page = requests.get(page_link)
