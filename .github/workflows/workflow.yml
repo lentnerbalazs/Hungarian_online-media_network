@@ -37,7 +37,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: running test
+    - name: running data_processing.py
       env:
         DROPBOX_TOKEN: ${{ secrets.DROPBOX_TOKEN }}
       run: |
