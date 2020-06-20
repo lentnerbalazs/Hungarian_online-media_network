@@ -110,7 +110,7 @@ for link in links:
 
 soups = get_soups(hvg_links)
 
-hvg_out = pd.DataFrame(list(zip(hvg_links, contents)), columns=["Link", "Soup"])
+hvg_out = pd.DataFrame(list(zip(hvg_links, soups)), columns=["Link", "Soup"])
 hvg_out["Page"] = "HVG"
 
 
