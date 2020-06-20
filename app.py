@@ -18,8 +18,6 @@ import bs4
 
 from bs4 import BeautifulSoup
 import bs4
-import selenium
-from selenium import webdriver
 import time
 import numpy as np
 from datetime import datetime
