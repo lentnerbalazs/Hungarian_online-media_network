@@ -30,7 +30,7 @@ subprocess.call(
         "-o", 
         "StrictHostKeyChecking=no", 
         "-o", 
-        "UserKnownHostsFile=/dev/null"
+        "UserKnownHostsFile=/dev/null",
         "-i",
         key_file_path,
         data_file_path,
