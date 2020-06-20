@@ -340,7 +340,7 @@ new_posts["Date"] = date.today()
 new_posts
 
 local_path = "/links_soups.pkl"
-dropbox_path = "/links_soups_{}.pkl".format(date.today().strftime("%d-%m-%Y"))"
+dropbox_path = "/links_soups_{}.pkl".format(date.today().strftime("%d-%m-%Y"))
 
 new_posts.to_pickle(local_path)
 
