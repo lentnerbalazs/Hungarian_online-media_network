@@ -4,6 +4,7 @@ import os
 import dotenv
 import string
 import requests
+import dropbox
 
 from bs4 import BeautifulSoup
 import bs4
@@ -20,8 +21,6 @@ import sqlalchemy
 
 
 dotenv.load_dotenv()
-
-constring = os.environ["VL_CONSTRING"]
 
 # Alap függvények
 
@@ -338,14 +337,17 @@ new_posts = pd.concat(
 )
 new_posts["Date"] = date.today()
 
-new_posts.to_sql(
-    name="links_soups", con=constring, if_exists="append", index=False
-)
+new_posts
 
-main = pd.read_sql_table("links_soups", con=constring)
+local_path = "/links_soups.pkl"
+dropbox_path = "/links_soups_{}.pkl".format(date.today().strftime("%d-%m-%Y"))"
 
+new_posts.to_pickle(local_path)
 
-main = main.drop_duplicates(subset="Link", keep="last")
+dropbox_access_token = os.environ["DROPBOX_TOKEN"]
 
+client = dropbox.Dropbox(dropbox_access_token)
+print("[SUCCESS] dropbox account linked")
 
-main.to_sql(name="links_soups", con=constring, if_exists="replace", index=False)
+client.files_upload(open(local_path, "rb").read(), dropbox_path)
+print("[UPLOADED] to {}".format(dropbox_path))
