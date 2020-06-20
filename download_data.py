@@ -8,8 +8,6 @@ import dropbox
 
 from bs4 import BeautifulSoup
 import bs4
-import selenium
-from selenium import webdriver
 import time
 import pandas as pd
 import numpy as np
