@@ -10,3 +10,5 @@ gunicorn
 pyvis
 plotly
 dash
+dash-html-components
+dash-core-components
