@@ -113,7 +113,7 @@ hvg_out["Page"] = "HVG"
 
 
 # Origo
-home = "origo.hu"
+home = "www.origo.hu"
 day = date.today().strftime("%Y%m%d")
 # day = "20200617"
 origo_links = get_links(home, day)
