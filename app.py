@@ -50,19 +50,22 @@ dotenv.load_dotenv()
 # In[2]:
 
 
-constring = os.environ["VL_CONSTRING"]
-
+dropbox_access_token = os.environ["DROPBOX_TOKEN"]
+client = dropbox.Dropbox(dropbox_access_token)
 
 # In[4]:
+data_name = "contents_{}.pkl".format(date.today().strftime("%d-%m-%Y"))
 
+metadata, data = client.files_download("/" + data_name)
 
-data=pd.read_sql_table("VL_articles_main_v1", con=constring)
-
+data= pickle.loads(data.content)
 
 # In[5]:
+edge_name = "edgelist.pkl"
 
+metadata, edge_data = client.files_download("/" + edge_name)
 
-edgelist=pd.read_sql_table("VL_edgelist_main_v1", con=constring)
+edgelist = pickle.loads(edge_data.content)
 
 
 # In[6]:
