@@ -25,6 +25,10 @@ data_file_path = "random_test.pkl"
 subprocess.call(
     [
         "scp",
+        "-o", 
+        "StrictHostKeyChecking=no", 
+        "-o", 
+        "UserKnownHostsFile=/dev/null"
         "-P",
         "2222",
         "-i",
