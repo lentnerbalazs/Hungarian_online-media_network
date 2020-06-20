@@ -220,7 +220,7 @@ A megjelenítés Dash felületen egy Heroku applikáción keresztül történik.
 app.layout = html.Div(
     children=[
         H1(
-            children=" Citation network",
+            children=" Hivatkozási hálózat ",
             style={
                 "color": "black",
                 "backgroundColor": "ffffff",
@@ -231,7 +231,7 @@ app.layout = html.Div(
             children=[
                 html.P(
                     children=[
-                        H3(children="What is this all about?"),
+                        H3(children="Miről szól a projekt?"),
                         html.Element(dcc.Markdown(children=markdown_text),),
                     ],
                     className="six columns",
