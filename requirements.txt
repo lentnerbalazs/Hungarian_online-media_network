@@ -12,3 +12,5 @@ oauth2client==4.1.3
 mysqlclient==1.4.6
 psycopg2==2.8.5
 sqlalchemy==1.3.9
+pyvis==0.1.7.0
+networkx==2.4
