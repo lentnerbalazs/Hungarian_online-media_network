@@ -1,6 +1,6 @@
 # Online media citation network in Hungary
 
-Ez az app egy kurzuszáró munka a Rajk Szakkollégium Alkalmazott Adatközpontú Algoritmus tervezés c. kurzusára. A projek lényege,hogy Github Actions segítségével naponta kétszer letölti 10 híroldal cikkeit, ezeknek a szövegét kinyeri és abban megkeresi a többi adatbázisban szereplő oldalra mutató hivatkozásokat. A hivatkozásokból hálózatot építet valamint a szövegetből is leíró statisztikákat készít hírportál szerinti bontásokban. A megjelenítés Dash felületen egy Heroku applikáción keresztül történik.
+Ez a projekt egy kurzuszáró munka a Rajk Szakkollégium Alkalmazott Adatközpontú Algoritmus tervezés kurzusára. A projekt lényege, hogy Github Actions segítségével naponta kétszer letöltjük 12 magyar hírportál cikkeit, majd a szövegekből kinyerjük az oldalak egymásra mutató hivatkozásait. A hivatkozásokból hálózatot építünk a cikkek szövegeiből pedig egyszerű leíró statisztikákat készítünk hírportál szerinti bontásban. A megjelenítés Dash felületen egy Heroku applikáción keresztül történik.
 
 ### Honlap: https://vl-app-f.herokuapp.com/
 ### Szerzők: Lentner Balázs, Vig Ádám
