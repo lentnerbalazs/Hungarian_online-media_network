@@ -31,7 +31,7 @@ jobs:
         
     - name: Upload test
       env:
-        RAJK_KEY: ${{ secrets.RAJK_KEY }}
+        RAJK_KEY: ${{ secrets.DROPBOX_TOKEN }}
       run: |
         python test.py
      
