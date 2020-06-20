@@ -31,7 +31,7 @@ jobs:
         
     - name: Upload test
       env:
-        VL_CONSTRING: ${{ secrets.RAJK_KEY }}
+        RAJK_KEY: ${{ secrets.RAJK_KEY }}
       run: |
         python test.py
      
