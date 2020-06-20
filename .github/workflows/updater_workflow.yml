@@ -23,6 +23,11 @@ jobs:
         GSPREAD_PRIVATE_KEY: ${{ secrets.GS_PRIVATE_KEY }}
       run: |
         python job_1.py
- 
+    - name: Clean Data and Edgelist
+      env:
+        VL_CONSTRING: ${{ secrets.VL_CONSTRING }}
+      run: |
+        python cleaning_and_edges.py
+     
         git config --global user.email "gh-actions@github.com"
         git config --global user.name "github actions"
