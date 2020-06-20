@@ -337,7 +337,7 @@ new_posts = pd.concat(
 )
 new_posts["Date"] = date.today()
 
-new_posts
+new_posts["Soup"] = new_posts["Soup"].apply(str)
 
 local_path = "/links_soups.pkl"
 dropbox_path = "/links_soups_{}.pkl".format(date.today().strftime("%d-%m-%Y"))
