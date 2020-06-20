@@ -7,3 +7,4 @@ A következő oldalakról töltünk le cikkeket:
 
 ### Honlap: https://vl-app-f.herokuapp.com/
 ### Szerzők: Lentner Balázs, Vig Ádám
+#### 2020.06.20.
