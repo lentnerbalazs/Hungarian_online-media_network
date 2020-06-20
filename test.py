@@ -8,7 +8,7 @@ import dropbox
 
 df = pd.DataFrame(np.random.randint(0, 100, size=(100, 4)), columns=list("ABCD"))
 
-computer_path = "/random_test.pkl"
+computer_path = "random_test.pkl"
 df.to_pickle(computer_path)
 
 print("getting secret")
