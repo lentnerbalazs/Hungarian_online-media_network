@@ -17,7 +17,7 @@ key_file_path = "temp_key"
 with open(key_file_path, "w") as fp:
     fp.write(key)
 
-subprocess.call(["chmod", "600", key_file_path])
+subprocess.call(["chmod", "400", key_file_path])
 
 
 data_file_path = "random_test.pkl"
