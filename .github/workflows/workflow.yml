@@ -21,10 +21,10 @@ jobs:
       env:
         DROPBOX_TOKEN: ${{ secrets.DROPBOX_TOKEN }}
       run: |
-        python job_1.py
+        python download_data.py
         git config --global user.email "gh-actions@github.com"
         git config --global user.name "github actions"
-  test:
+  data-processing:
     runs-on: windows-latest
     steps:
     - name: "Checkout repository"
@@ -39,9 +39,9 @@ jobs:
         pip install -r requirements.txt
     - name: running test
       env:
-        RAJK_KEY: ${{ secrets.RAJK_KEY }}
+        DROPBOX_TOKEN: ${{ secrets.DROPBOX_TOKEN }}
       run: |
-        python file_upload_to_rajkos_szerver.py
+        python job_1.py
         git config --global user.email "gh-actions@github.com"
         git config --global user.name "github actions"
     
