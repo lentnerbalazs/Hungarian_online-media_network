@@ -1,6 +1,6 @@
 name: "Vig_Lentner"
 
-on: push
+#on: push
 
 
 jobs:
