@@ -185,7 +185,7 @@ data['uniq_wds'] = data['tokenized'].str.split().apply(lambda x: len(set(x)))
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
-app.title = "Pass network"
+app.title = "Média hálózat"
 
 app.scripts.config.serve_locally = True
 
@@ -208,11 +208,11 @@ fig2.update_layout(title_text="Átlagos szószám hírportálonként",
 
 
 markdown_text = """
-Ez az app a kurzuszáró munkája Vig Ádamnak és Lentner Balázsnak a Rajk Szakkollégium Alkalmazott Adatközpontú 
-Algoritmus tervezés c. kurzusára. A projek lényege,hogy [Github Actions](https://github.com/lentnerbalazs/Vig_Lentner) segítségével naponta kétszer letölti 10 híroldal 
-cikkeit, ezeknek a szövegét kinyeri és abban megkeresi a többi adatbázisban szereplő oldalra mutató hivatkozásokat. 
-A hivatkozásokból hálózatot építet valamint a szövegetből is leíró statisztikákat készít hírportál szerinti bontásokban.
-A megjelenítés Dash felületen egy Heroku applikáción keresztül történik.
+Ez a projekt egy kurzuszáró munka a Rajk Szakkollégium Alkalmazott Adatközpontú Algoritmustervezés kurzusára. 
+A projekt lényege, hogy [Github Actions](https://github.com/lentnerbalazs/Vig_Lentner) segítségével naponta kétszer letöltjük 12 magyar hírportál főoldalán található 
+cikkeket, majd a szövegekből kinyerjük az oldalak egymásra mutató hivatkozásait. A hivatkozásokból hálózatot építünk 
+a cikkek szövegeiből pedig egyszerű leíró statisztikákat készítünk hírportál szerinti bontásban. A megjelenítés Dash 
+felületen egy Heroku applikáción keresztül történik.
 """
 
 
