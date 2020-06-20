@@ -17,23 +17,22 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    #- name: Update sheet
-    #  env:
-    #    VL_CONSTRING: ${{ secrets.VL_CONSTRING }}
-    #    GSPREAD_PRIVATE_KEY: ${{ secrets.GS_PRIVATE_KEY }}
-    #  run: |
-    #    python job_1.py
+    - name: Update dropbox
+      env:
+        DROPBOX_TOKEN: ${{ secrets.DROPBOX_TOKEN }}
+      run: |
+        python job_1.py
     #- name: Clean Data and Edgelist
     #  env:
     #    VL_CONSTRING: ${{ secrets.VL_CONSTRING }}
     #  run: |
     #    python cleaning_and_edges.py
         
-    - name: Upload test
-      env:
-        DROPBOX_TOKEN: ${{ secrets.DROPBOX_TOKEN }}
-      run: |
-        python test.py
+    #- name: test
+    #  env:
+    #    DROPBOX_TOKEN: ${{ secrets.DROPBOX_TOKEN }}
+    #  run: |
+    #    python test.py
      
         git config --global user.email "gh-actions@github.com"
         git config --global user.name "github actions"
