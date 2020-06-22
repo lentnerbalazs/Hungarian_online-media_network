@@ -1,7 +1,8 @@
 name: "Vig_Lentner"
 
-#on: push
-
+on: 
+  schedule:
+    - cron:  '* /12 * * *'
 
 jobs:
   download-data:
