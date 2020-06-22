@@ -57,7 +57,7 @@ dropbox_access_token = os.environ["DROPBOX_TOKEN"]
 client = dropbox.Dropbox(dropbox_access_token)
 
 # In[4]:
-data_name = "contents_{}.pkl".format(date.today().strftime("%d-%m-%Y"))
+data_name = "contents.pkl"
 
 metadata, data = client.files_download("/" + data_name)
 
