@@ -33,6 +33,9 @@ files = []
 for file in response.entries:
     files.append(file.name)
 
+files.remove("edgelist.pkl")
+files.remove("contents.pkl")
+
 df = pd.DataFrame(columns=["Link", "Soup", "Page", "Date", "Content"])
 for name in files:
     metadata, data = client.files_download("/" + name)
@@ -170,7 +173,7 @@ def get_VG(df):
 
 
 # figyelő
-def get_Figyelő(df):
+def get_Figyelo(df):
     page = "Figyelő"
     soups = df.loc[df["Page"] == page]["Soup"].dropna()
     for i, soup in enumerate(soups):
@@ -187,7 +190,7 @@ def get_Figyelő(df):
 
 
 # alfahír
-def get_Alfahír(df):
+def get_Alfahir(df):
     page = "Alfahír"
     soups = df.loc[df["Page"] == page]["Soup"].dropna()
     for i, soup in enumerate(soups):
@@ -242,29 +245,38 @@ get_24(df)
 get_Ripost(df)
 get_888(df)
 get_Mandiner(df)
-get_Figyelő(df)
+get_Figyelo(df)
 get_VG(df)
 get_Napi(df)
-get_Alfahír(df)
+get_Alfahir(df)
 get_Index(df)
 
 df = df.drop(columns="Soup")
 
+meta, data = client.files_download("/contents.pkl")
+
+prev_data = pickle.loads(data.content)
+
+updated_data = pd.concat([prev_data, df])
+
 local_path = "/contents.pkl"
-dropbox_path = "/contents_{}.pkl".format(date.today().strftime("%d-%m-%Y"))
 
 df.to_pickle(local_path)
 
 client = dropbox.Dropbox(dropbox_access_token)
 print("[SUCCESS] dropbox account linked")
 
-client.files_upload(open(local_path, "rb").read(), dropbox_path)
+client.files_upload(
+    open(local_path, "rb").read(),
+    dropbox_path,
+    mode=dropbox.files.WriteMode("overwrite", None),
+)
 print("[UPLOADED] to {}".format(dropbox_path))
 
 
 # Edgelist
 
-name = "contents_{}.pkl".format(date.today().strftime("%d-%m-%Y"))
+name = "contents.pkl"
 metadata, data = client.files_download("/" + name)
 
 data = pickle.loads(data.content)
@@ -294,5 +306,9 @@ dropbox_path = "/edgelist.pkl"
 
 edgelist.to_pickle(local_path)
 
-client.files_upload(open(local_path, "rb").read(), dropbox_path)
+client.files_upload(
+    open(local_path, "rb").read(),
+    dropbox_path,
+    mode=dropbox.files.WriteMode("overwrite", None),
+)
 print("[UPLOADED] to {}".format(dropbox_path))
