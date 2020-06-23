@@ -260,6 +260,7 @@ prev_data = pickle.loads(data.content)
 updated_data = pd.concat([prev_data, df])
 
 local_path = "/contents.pkl"
+dropbox_path= "/contents.pkl"
 
 df.to_pickle(local_path)
 
