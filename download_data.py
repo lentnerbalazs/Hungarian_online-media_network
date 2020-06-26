@@ -22,6 +22,7 @@ dotenv.load_dotenv()
 
 # Alap függvények
 
+
 def get_links(home_string, day_string):
     page = requests.get("https://" + home + "/", allow_redirects=False)
     soup = BeautifulSoup(page.content, "html.parser")
@@ -45,8 +46,7 @@ def get_soups(page_links, sleep_time=3):
     return soups
 
 
-
-#Mandiner
+# Mandiner
 home = "mandiner.hu"
 day = date.today().strftime("%Y%m%d")
 
@@ -67,11 +67,8 @@ for link in links:
 
 soups = get_soups(mandiner_links)
 
-mandiner_out = pd.DataFrame(
-    list(zip(mandiner_links, soups)), columns=["Link", "Soup"]
-)
+mandiner_out = pd.DataFrame(list(zip(mandiner_links, soups)), columns=["Link", "Soup"])
 mandiner_out["Page"] = "Mandiner"
-
 
 
 # 444
@@ -82,7 +79,6 @@ soups = get_soups(negy_links)
 
 negy_out = pd.DataFrame(list(zip(negy_links, soups)), columns=["Link", "Soup"])
 negy_out["Page"] = "444"
-
 
 
 # HVg
@@ -111,12 +107,19 @@ hvg_out = pd.DataFrame(list(zip(hvg_links, soups)), columns=["Link", "Soup"])
 hvg_out["Page"] = "HVG"
 
 
-
 # Origo
-home = "www.origo.hu"
+home = "www.origo.hu/index.html"
 day = date.today().strftime("%Y%m%d")
-# day = "20200617"
-origo_links = get_links(home, day)
+
+page = requests.get("https://" + home, allow_redirects=False)
+soup = BeautifulSoup(page.content, "html.parser")
+l = []
+for item in soup.find_all("a"):
+    if type(item.get("href")) == str:
+        if day in item.get("href"):
+            if "origo.hu" in item.get("href"):
+                l.append(item.get("href"))
+origo_links = list(set(l))
 
 soups = get_soups(origo_links)
 
@@ -138,13 +141,11 @@ for link in links:
 
 soups = get_soups(huszon_links)
 
-huszon_out = pd.DataFrame(
-    list(zip(huszon_links, soups)), columns=["Link", "Soup"]
-)
+huszon_out = pd.DataFrame(list(zip(huszon_links, soups)), columns=["Link", "Soup"])
 huszon_out["Page"] = "24.hu"
 
 
-#Ripost
+# Ripost
 page = requests.get("https://ripost.hu/")
 soup = BeautifulSoup(page.content, "html.parser")
 l = []
@@ -163,9 +164,7 @@ for link in links:
 
 soups = get_soups(ripost_links)
 
-ripost_out = pd.DataFrame(
-    list(zip(ripost_links,soups)), columns=["Link", "Soup"]
-)
+ripost_out = pd.DataFrame(list(zip(ripost_links, soups)), columns=["Link", "Soup"])
 ripost_out["Page"] = "Ripost"
 
 
@@ -216,7 +215,6 @@ vg_out = pd.DataFrame(list(zip(vg_links, soups)), columns=["Link", "Soup"])
 vg_out["Page"] = "Világgazdaság"
 
 
-
 # Figyelő
 
 page = requests.get("https://figyelo.hu/")
@@ -240,9 +238,7 @@ for link in links:
 
 soups = get_soups(figyelo_links)
 
-figyelo_out = pd.DataFrame(
-    list(zip(figyelo_links, soups)), columns=["Link", "Soup"]
-)
+figyelo_out = pd.DataFrame(list(zip(figyelo_links, soups)), columns=["Link", "Soup"])
 figyelo_out["Page"] = "Figyelő"
 
 
@@ -266,11 +262,8 @@ for link in links:
 
 soups = get_soups(alfahir_links)
 
-alfahir_out = pd.DataFrame(
-    list(zip(alfahir_links, soups)), columns=["Link", "Soup"]
-)
+alfahir_out = pd.DataFrame(list(zip(alfahir_links, soups)), columns=["Link", "Soup"])
 alfahir_out["Page"] = "Alfahír"
-
 
 
 # Napi.hu
@@ -314,7 +307,6 @@ soups = get_soups(index_links)
 
 index_out = pd.DataFrame(list(zip(index_links, soups)), columns=["Link", "Soup"])
 index_out["Page"] = "Index"
-
 
 
 new_posts = pd.concat(
