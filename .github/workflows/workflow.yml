@@ -2,7 +2,7 @@ name: "Vig_Lentner"
 
 on: 
   schedule:
-    - cron:  '0 15 * * *'
+
 
 jobs:
   download-data:
